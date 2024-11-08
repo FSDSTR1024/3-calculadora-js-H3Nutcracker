@@ -1,6 +1,10 @@
+// *Variables globales* //
 let firstValue = null;
 let operator = null;
 
+// *Función para el funcionamiento de la pantalla* //
+// *Controla que no se puedan escribir números enteros con 0 a la izquierda* //
+// TODO: Controlar que no exceda la longitud de la pantalla //
 function updateDisplay(value) {
   const display = document.getElementById("display");
   if (display.textContent.length < 10) {
@@ -21,12 +25,19 @@ function updateDisplay(value) {
   updateClearButton();
 }
 
+function updateLog(value) {
+  // TODO: Implementar funcionalidad del log
+}
+
+// *Función para cambiar el texto del botón de limpiar dependiendo de lo que hay en la pantalla* //
 function updateClearButton() {
   const display = document.getElementById("display");
   const clearButton = document.getElementById("clear");
   clearButton.textContent = display.value === "" ? "AC" : "C";
 }
 
+//* Función para limpiar la pantalla* //
+// TODO: Hacer que cuando se presione C limpie la pantalla y cuando se presione AC limpie también el log //
 function clearDisplay() {
   const display = document.getElementById("display");
   display.value = "";
@@ -35,17 +46,21 @@ function clearDisplay() {
   updateClearButton();
 }
 
+// *Funcionalidad de botones* //
+
+//* Botón de borrar* //
 function erase() {
   const display = document.getElementById("display");
   display.value = display.value.slice(0, -1);
   updateClearButton();
 }
 
+//* Oeraciones *//
 function setOperator(op) {
   const display = document.getElementById("display");
   firstValue = parseFloat(display.value);
   operator = op;
-  display.value = ""; // Limpia el display para el segundo valor
+  display.value = "";
 }
 
 function solve() {
@@ -97,5 +112,5 @@ function divide(num1, num2) {
 }
 
 function percentage(total, percentage) {
-  //
+  // TODO: Implementar %
 }
