@@ -3,9 +3,6 @@
 html {
     font-family: 'Fira Sans', sans-serif;
     font-size: 20px;
-    height: 100vh;
-    background-image: linear-gradient(-20deg, #1c1c1c, #ff6f3c);
-    background-size: cover;
 }
 
 body {
@@ -14,6 +11,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(#1c1c1c, #ff6f3c);
+    background-size: cover;
 }
 
 h1 {
@@ -49,7 +49,7 @@ button {
 }
 
 .functionButton {
-    color: orange;
+    color: #ff7300e8;
 }
 
 .numberButton {
@@ -57,7 +57,7 @@ button {
 }
 
 #equal {
-    background-color: orange;
+    background-color: #ff7300e8;
     color: white;
 }
 
@@ -77,4 +77,46 @@ button {
     background-color: black;
     border-radius: 15px;
     padding: 10px;
+}
+
+#operationsLog {
+    align-items: center;
+}
+
+#log {
+    text-align: right;
+    font-family: "Orbitron", sans-serif;
+    font-size: 20px;
+    cursor: default;
+    outline: none;
+    background-color: black;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 335px;
+    height: 250px;
+}
+
+footer {
+    text-align: center;
+    background-color: #302f2f;
+    color: #ff7300e8;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #af0505;
+}
+
+a:hover {
+    color: #ff7300e8;
+    text-decoration: underline;
+    scale: 1.1;
+    cursor:alias
 }

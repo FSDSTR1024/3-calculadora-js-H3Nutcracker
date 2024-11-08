@@ -1,6 +1,4 @@
-let firstValue = null;
-let operator = null;
-
+// *Funcionamiento del display y los botones de borar* //
 function updateDisplay(value) {
   const display = document.getElementById("display");
   if (display.textContent.length < 10) {
@@ -21,6 +19,7 @@ function updateDisplay(value) {
   updateClearButton();
 }
 
+// **Cambia el botón de limpiar en función de lo que haya en el display** //
 function updateClearButton() {
   const display = document.getElementById("display");
   const clearButton = document.getElementById("clear");
@@ -41,6 +40,10 @@ function erase() {
   updateClearButton();
 }
 
+// **Variables para almacenar el primer valor y el operador actual** //
+let firstValue = null;
+let operator = null;
+
 function setOperator(op) {
   const display = document.getElementById("display");
   firstValue = parseFloat(display.value);
@@ -48,54 +51,43 @@ function setOperator(op) {
   display.value = ""; // Limpia el display para el segundo valor
 }
 
+function add() { setOperator('+'); }
+function substract() { setOperator('-'); }
+function multiply() { setOperator('*'); }
+function divide() { setOperator('/'); }
+
+// **Calcula el resultado en función del operador y muestra el resultado** //
 function solve() {
   const display = document.getElementById("display");
   const secondValue = parseFloat(display.value);
 
   if (operator && firstValue !== null && !isNaN(secondValue)) {
-    let result;
-
+    let result = 0;
     switch (operator) {
       case '+':
-        result = add(firstValue, secondValue);
+        result = firstValue + secondValue;
         break;
       case '-':
-        result = subtract(firstValue, secondValue);
+        result = firstValue - secondValue;
         break;
       case '*':
-        result = multiply(firstValue, secondValue);
+        result = firstValue * secondValue;
         break;
       case '/':
-        result = divide(firstValue, secondValue);
+        result = secondValue !== 0 ? firstValue / secondValue : 'Error';
         break;
     }
-
-    display.value = result;
-    firstValue = result;
+    display.value = result.toString().slice(0, 10); // Limita a 10 caracteres
+    firstValue = null;
     operator = null;
   }
 }
 
-function add(num1, num2) {
-  return num1 + num2;
-}
-
-function subtract(num1, num2) {
-  return num1 - num2;
-}
-
-function multiply(num1, num2) {
-  return num1 * num2;
-}
-
-function divide(num1, num2) {
-  if (num2 !== 0) {
-    return num1 / num2;
-  } else {
-    return "Error";
+// **Función para el porcentaje** //
+function percentage() {
+  const display = document.getElementById("display");
+  const currentValue = parseFloat(display.value);
+  if (!isNaN(currentValue)) {
+    display.value = (currentValue / 100).toString().slice(0, 10);
   }
-}
-
-function percentage(total, percentage) {
-  //
 }

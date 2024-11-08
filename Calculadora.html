@@ -16,25 +16,34 @@
             <button class="functionButton" id="clear" onclick="clearDisplay()">AC</button>
             <button class="functionButton" id="backspace" onclick="erase()">&#9003;</button>
             <button class="functionButton" id="percent" onclick="percentage()">%</button>
-            <button class="functionButton" id="divide" onclick="divide()">&divide;</button>
+            <button class="functionButton" id="divide" onclick="setOperator('/')">&divide;</button>
             <button class="numberButton" id="seven" onclick="updateDisplay('7')">7</button>
             <button class="numberButton" id="eight" onclick="updateDisplay('8')">8</button>
             <button class="numberButton" id="nine" onclick="updateDisplay('9')">9</button>
-            <button class="functionButton" id="multiply"  onclick="multiply()">X</button>
+            <button class="functionButton" id="multiply"  onclick="setOperator('*')">X</button>
             <button class="numberButton" id="four" onclick="updateDisplay('4')">4</button>
             <button class="numberButton" id="five" onclick="updateDisplay('5')">5</button>
             <button class="numberButton" id="six" onclick="updateDisplay('6')">6</button>
-            <button class="functionButton" id="substract"  onclick="substract()">-</button>
+            <button class="functionButton" id="substract"  onclick="setOperator('-')">-</button>
             <button class="numberButton" id="one" onclick="updateDisplay('1')">1</button>
             <button class="numberButton" id="two" onclick="updateDisplay('2')">2</button>
             <button class="numberButton" id="three" onclick="updateDisplay('3')">3</button>
-            <button class="functionButton" id="add"  onclick="add()">+</button>
+            <button class="functionButton" id="add"  onclick="setOperator('+')">+</button>
             <button class="numberButton" id="zero" onclick="updateDisplay('0')">0</button>
             <button class="numberButton" id="doublezero" onclick="updateDisplay('00')">00</button>
             <button class="functionButton" id="decimal" onclick="updateDisplay('.')">.</button>
             <button class="functionButton" id="equal" onclick="solve()">=</button>
         </div>
     </div>
+
+    <div id="operationsLog">
+        <h1>Operations Log</h1>
+        <p id="log"></p>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by <a href="https://github.com/H3Nutcracker">H3Nutcracker</a></p>
+    </footer>
 
     <script src="Calculadora.js"></script>
 </body>
