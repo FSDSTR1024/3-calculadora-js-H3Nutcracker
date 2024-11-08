@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Calculadora.css">
-    <link rel="icon" href="/Assets/calculadora.png">
+    <link rel="icon" href="/3-calculadora-js-H3Nutcracker/Assets/calculadora.png" type="image/x-icon">
     <title>Calculator</title>
 </head>
 <body>
     <h1>Calculator App</h1>
 
     <div id="calculatorFrame">
-        <input type="text" id="display" placeholder="0" >
+        <input type="text" id="display" placeholder="0" readonly maxlength="10">
         <div id="calculator">
             <button class="functionButton" id="clear" onclick="clearDisplay()">AC</button>
-            <button class="functionButton" id="backspace">&#9003;</button>
-            <button class="functionButton" id="percent">%</button>
-            <button class="functionButton" id="divide">&divide;</button>
-            <button class="numberButton" id="seven">7</button>
-            <button class="numberButton" id="eight">8</button>
-            <button class="numberButton" id="nine">9</button>
-            <button class="functionButton" id="multiply">X</button>
-            <button class="numberButton" id="four">4</button>
-            <button class="numberButton" id="five">5</button>
-            <button class="numberButton" id="six">6</button>
-            <button class="functionButton" id="substract">-</button>
-            <button class="numberButton" id="one">1</button>
-            <button class="numberButton" id="two">2</button>
-            <button class="numberButton" id="three">3</button>
-            <button class="functionButton" id="add">+</button>
-            <button class="numberButton" id="zero">0</button>
-            <button class="numberButton" id="doublezero">00</button>
-            <button class="functionButton" id="decimal">.</button>
-            <button class="functionButton" id="equal">=</button>
+            <button class="functionButton" id="backspace" onclick="erase()">&#9003;</button>
+            <button class="functionButton" id="percent" onclick="percentage()">%</button>
+            <button class="functionButton" id="divide" onclick="divide()">&divide;</button>
+            <button class="numberButton" id="seven" onclick="updateDisplay('7')">7</button>
+            <button class="numberButton" id="eight" onclick="updateDisplay('8')">8</button>
+            <button class="numberButton" id="nine" onclick="updateDisplay('9')">9</button>
+            <button class="functionButton" id="multiply"  onclick="multiply()">X</button>
+            <button class="numberButton" id="four" onclick="updateDisplay('4')">4</button>
+            <button class="numberButton" id="five" onclick="updateDisplay('5')">5</button>
+            <button class="numberButton" id="six" onclick="updateDisplay('6')">6</button>
+            <button class="functionButton" id="substract"  onclick="substract()">-</button>
+            <button class="numberButton" id="one" onclick="updateDisplay('1')">1</button>
+            <button class="numberButton" id="two" onclick="updateDisplay('2')">2</button>
+            <button class="numberButton" id="three" onclick="updateDisplay('3')">3</button>
+            <button class="functionButton" id="add"  onclick="add()">+</button>
+            <button class="numberButton" id="zero" onclick="updateDisplay('0')">0</button>
+            <button class="numberButton" id="doublezero" onclick="updateDisplay('00')">00</button>
+            <button class="functionButton" id="decimal" onclick="updateDisplay('.')">.</button>
+            <button class="functionButton" id="equal" onclick="solve()">=</button>
         </div>
     </div>
 
