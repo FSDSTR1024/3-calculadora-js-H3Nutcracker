@@ -100,6 +100,7 @@ function solve() {
       log.insertAdjacentHTML('afterbegin', `${firstValue} ${operator} ${secondValue} = ${result}<br>`);
     }
 
+    display.value = result
     firstValue = result;
     operator = null;
   }
