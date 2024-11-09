@@ -1,13 +1,13 @@
 // *Variables globales* //
 let firstValue = null;
 let operator = null;
+const display = document.getElementById("display");
+const log = document.getElementById("log");
 
-// *Función para el funcionamiento de la pantalla* //
+// *Función para la pantalla* //
 // *Controla que no se puedan escribir números enteros con 0 a la izquierda* //
-// TODO: Controlar que no exceda la longitud de la pantalla //
 function updateDisplay(value) {
-  const display = document.getElementById("display");
-  if (display.textContent.length < 10) {
+  if (display.value.length < 10) {
     if (display.value === "" && value === "00") {
       display.value = "0.0";
     } else if (display.value === "" && value === ".") {
@@ -20,51 +20,51 @@ function updateDisplay(value) {
       display.value += value;
     }
   } else {
-    display.value = value;
+    display.value = "Error";
+    log.innerHTML += "Error max 10 digits<br>";
   }
   updateClearButton();
 }
 
-function updateLog(value) {
-  // TODO: Implementar funcionalidad del log
-}
-
 // *Función para cambiar el texto del botón de limpiar dependiendo de lo que hay en la pantalla* //
 function updateClearButton() {
-  const display = document.getElementById("display");
   const clearButton = document.getElementById("clear");
-  clearButton.textContent = display.value === "" ? "AC" : "C";
+  if (display.value === "") {
+    clearButton.textContent = "AC";
+  } else {
+    clearButton.textContent = "C";
+  }
 }
 
-//* Función para limpiar la pantalla* //
-// TODO: Hacer que cuando se presione C limpie la pantalla y cuando se presione AC limpie también el log //
+//* Función para limpiar la pantalla y el log dependiendo del botón* //
 function clearDisplay() {
-  const display = document.getElementById("display");
-  display.value = "";
+  if (display.value == "") {
+    log.textContent = "";
+  } else {
+    display.value = "";
   firstValue = null;
   operator = null;
   updateClearButton();
 }
+  }
+
 
 // *Funcionalidad de botones* //
 
 //* Botón de borrar* //
 function erase() {
-  const display = document.getElementById("display");
   display.value = display.value.slice(0, -1);
   updateClearButton();
 }
 
 //* Oeraciones *//
 function setOperator(op) {
-  const display = document.getElementById("display");
   firstValue = parseFloat(display.value);
   operator = op;
   display.value = "";
 }
 
 function solve() {
-  const display = document.getElementById("display");
   const secondValue = parseFloat(display.value);
 
   if (operator && firstValue !== null && !isNaN(secondValue)) {
@@ -83,9 +83,17 @@ function solve() {
       case '/':
         result = divide(firstValue, secondValue);
         break;
+      case '%':
+        result = percentage(firstValue, secondValue);
+        break;
     }
 
     display.value = result;
+    if (display.value == "Error") {
+      log.innerHTML += "Error max 10 digits<br>";
+    } else {
+      log.innerHTML += `${firstValue} ${operator} ${secondValue} = ${result}<br>`;
+    }
     firstValue = result;
     operator = null;
   }
@@ -112,5 +120,6 @@ function divide(num1, num2) {
 }
 
 function percentage(total, percentage) {
-  // TODO: Implementar %
+  const percentValue = total * (percentage / 100);
+  return percentValue;
 }
