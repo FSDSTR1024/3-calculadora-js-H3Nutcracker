@@ -21,7 +21,7 @@ function updateDisplay(value) {
     }
   } else {
     display.value = "Error";
-    log.innerHTML += "Error max 10 digits<br>";
+    log.insertAdjacentHTML("afterbegin", "Error max 10 digits<br>");
   }
   updateClearButton();
 }
@@ -65,10 +65,14 @@ function setOperator(op) {
 }
 
 function solve() {
+  if (display.value === "Error") {
+    return;
+  }
+
   const secondValue = parseFloat(display.value);
+  let result;
 
   if (operator && firstValue !== null && !isNaN(secondValue)) {
-    let result;
 
     switch (operator) {
       case '+':
@@ -86,14 +90,16 @@ function solve() {
       case '%':
         result = percentage(firstValue, secondValue);
         break;
+      default:
+        result = NaN
     }
 
-    display.value = result;
-    if (display.value == "Error") {
-      log.innerHTML += "Error max 10 digits<br>";
+    if (isNaN(result)) {
+      log.insertAdjacentHTML('afterbegin', "Error invalid operation<br>");
     } else {
-      log.innerHTML += `${firstValue} ${operator} ${secondValue} = ${result}<br>`;
+      log.insertAdjacentHTML('afterbegin', `${firstValue} ${operator} ${secondValue} = ${result}<br>`);
     }
+
     firstValue = result;
     operator = null;
   }
