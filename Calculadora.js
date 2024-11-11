@@ -7,6 +7,9 @@ const log = document.getElementById("log");
 // *Función para la pantalla* //
 // *Controla que no se puedan escribir números enteros con 0 a la izquierda* //
 function updateDisplay(value) {
+  if (display.value === "Error") {
+    clearDisplay();
+  }
   if (display.value.length < 10) {
     if (display.value === "" && value === "00") {
       display.value = "0.0";
@@ -16,6 +19,8 @@ function updateDisplay(value) {
       display.value = "0.0";
     } else if (display.value === "0" && value === "00") {
       display.value = "0.00";
+    } else if (value === "." && display.value.includes(".")) {
+      display.value = display.value;
     } else {
       display.value += value;
     }
@@ -38,13 +43,13 @@ function updateClearButton() {
 
 //* Función para limpiar la pantalla y el log dependiendo del botón* //
 function clearDisplay() {
-  if (display.value == "") {
+  if (display.value === "") {
     log.textContent = "";
   } else {
     display.value = "";
-  firstValue = null;
-  operator = null;
-  updateClearButton();
+    firstValue = null;
+    operator = null;
+    updateClearButton();
 }
   }
 
@@ -57,8 +62,11 @@ function erase() {
   updateClearButton();
 }
 
-//* Oeraciones *//
+//* Operaciones *//
 function setOperator(op) {
+  if (operator && firstValue !== null && display.value !== "") {
+    solve();
+  }
   firstValue = parseFloat(display.value);
   operator = op;
   display.value = "";
@@ -95,12 +103,13 @@ function solve() {
     }
 
     if (isNaN(result)) {
+      display.value = "Error";
       log.insertAdjacentHTML('afterbegin', "Error invalid operation<br>");
     } else {
+      display.value = result
       log.insertAdjacentHTML('afterbegin', `${firstValue} ${operator} ${secondValue} = ${result}<br>`);
     }
 
-    display.value = result
     firstValue = result;
     operator = null;
   }
@@ -122,7 +131,7 @@ function divide(num1, num2) {
   if (num2 !== 0) {
     return num1 / num2;
   } else {
-    return "Error";
+    return NaN;
   }
 }
 
@@ -130,3 +139,29 @@ function percentage(total, percentage) {
   const percentValue = total * (percentage / 100);
   return percentValue;
 }
+
+// *Funcionalidad para el uso del teclado numerico* //
+
+document.addEventListener("keydown", function (event) {
+  if (event.key >= 0 && event.key <= 9) {
+    updateDisplay(event.key);
+  } else if (event.key === "Enter") {
+    solve();
+  } else if (event.key === "Backspace") {
+    erase();
+  } else if (event.key === "Delete") {
+    clearDisplay();
+  } else if (event.key === ".") {
+    updateDisplay(".");
+  } else if (event.key === "%") {
+    setOperator("%");
+  } else if (event.key === "+") {
+    setOperator("+");
+  } else if (event.key === "-") {
+    setOperator("-");
+  } else if (event.key === "*") {
+    setOperator("*");
+  } else if (event.key === "/") {
+    setOperator("/");
+  }
+})
