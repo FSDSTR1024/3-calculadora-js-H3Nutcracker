@@ -1,8 +1,7 @@
-// ! De momento hay un pequeño bug que no permite comenzar una nueva operación sin antes limpiar la pantalla manualmente. Pero el resto de funcionalidades están trabajando correctamente !//
-
 // *Variables globales* //
 let firstValue = null;
 let operator = null;
+let result = null;
 const display = document.getElementById("display");
 const log = document.getElementById("log");
 const clearButton = document.getElementById("clear");
@@ -10,7 +9,7 @@ const clearButton = document.getElementById("clear");
 // *Función para la pantalla* //
 // *Controla que no se puedan escribir números enteros con 0 a la izquierda, números con más de 10 digitos o decimales con 2 puntos* //
 function updateDisplay(value) {
-  if (display.value === "Error") {
+  if (display.value === "Error" || result === parseFloat(display.value)) {
     clearDisplay();
   }
   if (display.value.length < 10) {
@@ -93,7 +92,6 @@ function solve() {
   }
 
   const secondValue = parseFloat(display.value);
-  let result;
 
   if (operator && firstValue !== null && !isNaN(secondValue)) {
 
