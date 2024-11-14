@@ -46,10 +46,11 @@ function updateClearButton() {
 
 //* Función para limpiar la pantalla *//
 function clearDisplay() {
-    display.value = "";
-    firstValue = null;
-    operator = null;
-    updateClearButton();
+  display.value = "";
+  firstValue = null;
+  operator = null;
+  result = null;
+  updateClearButton();
 }
 
 //* Función para limpiar el log *//
