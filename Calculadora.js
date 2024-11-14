@@ -150,8 +150,7 @@ function divide(num1, num2) {
 }
 
 function percentage(total, percentage) {
-  const percentValue = total * (percentage / 100);
-  return percentValue;
+  return (percentage / 100) * total;
 }
 
 // *Funcionalidad para el uso del teclado numerico* //
