@@ -3,6 +3,7 @@
 // *Variables globales* //
 let firstValue = null;
 let operator = null;
+let isResultDisplayed = false;
 const display = document.getElementById("display");
 const log = document.getElementById("log");
 const clearButton = document.getElementById("clear");
@@ -10,7 +11,7 @@ const clearButton = document.getElementById("clear");
 // *Función para la pantalla* //
 // *Controla que no se puedan escribir números enteros con 0 a la izquierda, números con más de 10 digitos o decimales con 2 puntos* //
 function updateDisplay(value) {
-  if (display.value === "Error") {
+  if (display.value === "Error" || isResultDisplayed) {
     clearDisplay();
   }
   if (display.value.length < 10) {
@@ -47,10 +48,11 @@ function updateClearButton() {
 
 //* Función para limpiar la pantalla *//
 function clearDisplay() {
-    display.value = "";
-    firstValue = null;
-    operator = null;
-    updateClearButton();
+  display.value = "";
+  firstValue = null;
+  operator = null;
+  isResultDisplayed = false;
+  updateClearButton();
 }
 
 //* Función para limpiar el log *//
@@ -67,8 +69,6 @@ function handleClearButton() {
     clearDisplay();
   }
 }
-
-
 // *Funcionalidad de botones* //
 
 //* Botón de borrar* //
@@ -79,16 +79,31 @@ function erase() {
 
 //* Operaciones *//
 function setOperator(op) {
-  if (operator && firstValue !== null && display.value !== "") {
+  console.log(`Setting operator: ${op}`);
+  if (isResultDisplayed) {
+    firstValue = parseFloat(display.value);
+    operator = op;
+    display.value = "";
+    isResultDisplayed = false;
+    console.log(`New operation started with firstValue: ${firstValue}`);
+  } else if (operator && firstValue !== null && display.value !== "") {
+    console.log(`Existing operation with firstValue: ${firstValue}, operator: ${operator}, display value: ${display.value}`);
     solve();
+    operator = op;
+    display.value = "";
+    console.log(`Operator updated to: ${operator}`);
+  } else {
+    firstValue = parseFloat(display.value);
+    operator = op;
+    display.value = "";
+    console.log(`First value set to: ${firstValue}, operator set to: ${operator}`);
   }
-  firstValue = parseFloat(display.value);
-  operator = op;
-  display.value = "";
 }
 
 function solve() {
+  console.log(`Solving existing operation with firstValue: ${firstValue}, display value: ${display.value}`);
   if (display.value === "Error") {
+    console.log("Error in display value, returning");
     return;
   }
 
@@ -118,14 +133,18 @@ function solve() {
     }
 
     if (isNaN(result)) {
+      console.log("Error in calculation, setting display value to Error");
       display.value = "Error";
       log.insertAdjacentHTML('afterbegin', "Error invalid operation<br>");
     } else {
+      console.log(`Setting display value to result: ${result}`);
       display.value = result
       log.insertAdjacentHTML('afterbegin', `${firstValue} ${operator} ${secondValue} = ${result}<br>`);
+      console.log(`Setting firstValue to result: ${result}`);
+      firstValue = result;
+      isResultDisplayed = true;
     }
-
-    firstValue = result;
+    console.log(`Setting operator to null`);
     operator = null;
   }
 }
